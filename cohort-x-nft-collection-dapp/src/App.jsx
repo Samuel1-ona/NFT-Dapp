@@ -11,6 +11,8 @@ import { isAddress } from "ethers";
 import { useState } from "react";
 import useTransfer from "./hooks/useTransfer";
 
+
+
 configureWeb3Modal();
 
 function App() {
@@ -54,6 +56,7 @@ function App() {
 
 
     return (
+        <>
         <Container>
             <Header />
             <main className="mt-6">
@@ -76,11 +79,11 @@ function App() {
                                         <Text className="block">
                                             Description: {x.description}
                                         </Text>
-                                        <>
-                                            <Link href={`${import.meta.env.VITE_opensea_url}/${index}`}>View on Opensea</Link>
+                                        <Flex direction={"column"}>
+                                            <Link href={`${import.meta.env.VITE_opensea_url}/${index}`} className="underline my-2">View on Opensea</Link>
                                             <Dialog.Root>
                                                 <Dialog.Trigger>
-                                                    <Button className="bg-blue co">Transfer</Button>
+                                                    <Button className="button">Transfer</Button>
                                                 </Dialog.Trigger>
 
                                                 <Dialog.Content style={{ maxWidth: 450 }}>
@@ -102,7 +105,7 @@ function App() {
                                                                 placeholder="Enter valid address"
                                                             />
                                                         </label>
-                                                     
+
                                                     </Flex>
 
                                                     <Flex gap="3" mt="4" justify="end">
@@ -112,13 +115,14 @@ function App() {
                                                             </Button>
                                                         </Dialog.Close>
                                                         <Dialog.Close>
-                                                            <Button onClick={() => {
+                                                            <Button className="button" onClick={() => {
                                                                 handleTransfer(addressTo, index)
                                                             }}>Transfer</Button>
                                                         </Dialog.Close>
                                                     </Flex>
                                                 </Dialog.Content>
-                                            </Dialog.Root></>
+                                            </Dialog.Root>
+                                            </Flex>
                                     </Box>
                                 ))
                             )}
@@ -146,11 +150,11 @@ function App() {
                                             (() => {
                                                 switch (true) {
                                                     case x.isOwned && x.ownedByMe:
-                                                        return <>
-                                                            <Link href={`${import.meta.env.VITE_opensea_url}/${index}`}>View on Opensea</Link>
+                                                        return <Flex direction={"column"}>
+                                                            <Link href={`${import.meta.env.VITE_opensea_url}/${index}`} className="my-2 underline">View on Opensea</Link>
                                                             <Dialog.Root>
                                                                 <Dialog.Trigger>
-                                                                    <Button className="bg-blue co">Transfer</Button>
+                                                                    <Button className="button">Transfer</Button>
                                                                 </Dialog.Trigger>
 
                                                                 <Dialog.Content style={{ maxWidth: 450 }}>
@@ -181,21 +185,21 @@ function App() {
                                                                             </Button>
                                                                         </Dialog.Close>
                                                                         <Dialog.Close>
-                                                                            <Button onClick={() => {
+                                                                            <Button className="button" onClick={() => {
                                                                                 handleTransfer(address, index)
                                                                             }}>Transfer</Button>
                                                                         </Dialog.Close>
                                                                     </Flex>
                                                                 </Dialog.Content>
-                                                            </Dialog.Root></>
+                                                            </Dialog.Root></Flex>
                                                     case x.isOwned && !x.ownedByMe:
-                                                        return <><Link href={`${import.meta.env.VITE_opensea_url}/${index}`}>View on Opensea</Link>
-                                                        <Text>Owner: {x.NFTOwner?.toString().slice(0,5) + "..." + x.NFTOwner?.toString().slice(-5)}</Text></>;
+                                                        return <Flex direction={"column"}><Link href={`${import.meta.env.VITE_opensea_url}/${index}`} className="my-2 underline">View on Opensea</Link>
+                                                            <Text>Owner: {x.NFTOwner?.toString().slice(0, 5) + "..." + x.NFTOwner?.toString().slice(-5)}</Text></Flex>;
                                                     default:
                                                         return <>
                                                             <Dialog.Root>
                                                                 <Dialog.Trigger>
-                                                                    <Button color="blue">Mint</Button>
+                                                                    <Button className="button w-full my-4">Mint</Button>
                                                                 </Dialog.Trigger>
 
                                                                 <Dialog.Content style={{ maxWidth: 450 }}>
@@ -226,7 +230,7 @@ function App() {
                                                                             </Button>
                                                                         </Dialog.Close>
                                                                         <Dialog.Close>
-                                                                            <Button onClick={() => {
+                                                                            <Button className="button" onClick={() => {
                                                                                 handleMint(address, index)
                                                                             }}>Mint</Button>
                                                                         </Dialog.Close>
@@ -246,6 +250,8 @@ function App() {
                 />
             </main>
         </Container>
+       
+        </>
     );
 }
 
