@@ -190,7 +190,7 @@ function App() {
                                                             </Dialog.Root></>
                                                     case x.isOwned && !x.ownedByMe:
                                                         return <><Link href={`${import.meta.env.VITE_opensea_url}/${index}`}>View on Opensea</Link>
-                                                        <Text>Owner: {x.NFTOwner.toString().slice(0,5) + "..." + x.NFTOwner.toString().slice(-5)}</Text></>;
+                                                        <Text>Owner: {x.NFTOwner?.toString().slice(0,5) + "..." + x.NFTOwner?.toString().slice(-5)}</Text></>;
                                                     default:
                                                         return <>
                                                             <Dialog.Root>
